@@ -1,8 +1,8 @@
 #!/bin/bash
 
 memory_usage(){
-	memtotal=$(sudo cat /proc/meminfo | grep -w MemTotal)
-	memfree=$(sudo cat /proc/meminfo | grep -w MemFree)
+	memtotal=$(awk '$3=="kB"{$2=$2/1024;$3="MB"} 1' /proc/meminfo | column -t | grep MemTotal)
+	memfree=$(awk '$3=="kB"{$2=$2/1024;$3="MB"} 1' /proc/meminfo | column -t | grep MemFree)
 	echo "####################-MEMORY-####################"
 	echo $memtotal
 	echo $memfree
