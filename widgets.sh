@@ -1,5 +1,20 @@
+
 #!/bin/bash
-./mem.sh
-./proc.sh
-./user.sh
-./disk.sh
+
+contents=${WIDGET_CONTROL:-"mem,cpu"}
+
+IFS=","
+
+read -a scripts <<< $contents
+
+
+#./mem.sh
+#./proc.sh
+#./user.sh
+#./disk.sh
+
+
+for script in "${scripts[@]}"
+do
+  ./$script.sh
+done
